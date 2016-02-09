@@ -19,32 +19,9 @@ public class FlightAuthenticator implements Authenticator {
 
     private UserController userController = DataControllerHandler.getUserController();
 
-    public FlightAuthenticator(){
-        userController.genUsers();
-    }
-
     @Resource
     private WebServiceContext wsc;
 
-    @Override
-    public String authTest() {
-
-        MessageContext messageContext = wsc.getMessageContext();
-        Map headers = (Map) messageContext.get(MessageContext.HTTP_REQUEST_HEADERS);
-        List userList = (List) headers.get("Username");
-        List passList = (List) headers.get("Password");
-
-        String username = "";
-        String password = "";
-        if (userList != null && passList != null) {
-            username = (String) userList.get(0);
-            password = (String) passList.get(0);
-        }
-
-        if (username.equals("peter") && password.equals("peter"))
-            return "Yayyy";
-        return "Not Yayyy";
-    }
 
     @Override
     public AuthTicket authenticate(@WebParam(name = "username") String username, @WebParam(name = "password") String password) {
@@ -70,5 +47,10 @@ public class FlightAuthenticator implements Authenticator {
 
         }
         return new AuthTicket(username,false);
+    }
+
+    @Override
+    public boolean validateTicket(String username, int ticket) {
+        return userController.validateTicket(username,ticket);
     }
 }

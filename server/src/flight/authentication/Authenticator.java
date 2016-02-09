@@ -10,9 +10,10 @@ import javax.jws.WebService;
 public interface Authenticator {
 
 
-    @WebMethod
-    public String authTest();
 
     @WebMethod
     public AuthTicket authenticate(String username, String password);
+
+    @WebMethod
+    public boolean validateTicket(String username, int ticket);
 }

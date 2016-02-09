@@ -19,11 +19,9 @@ public class ItineraryService {
     private UserController userController = DataControllerHandler.getUserController();
 
     @WebMethod(operationName = "getItinerary")
-    public void getItinerary(@WebParam (name = "departureCity") String departureCity, @WebParam (name = "destinationCity") Integer destinationCity ) {
+    public void getItinerary(@WebParam (name = "departureCity") String departureCity, @WebParam (name = "destinationCity") String destinationCity ) {
 
-        if (userController.authenticate("peter",destinationCity)){
-            System.out.println("test " + userController.authenticate("peter",destinationCity));
-        }
+
 
         //Itinerary itinerary = new Itinerary(departureCity,destinationCity);
 
@@ -32,6 +30,9 @@ public class ItineraryService {
     @WebMethod(operationName = "checkAvailability")
     public void checkAvailability(@WebParam (name = "departureCity") String departureCity, @WebParam (name = "destinationCity") String destinationCity ) {
 
+
+        //Authenticator_Service authenticator_service = new Authenticator_Service();
+        //Authenticator authenticator = authenticator_service.getAuthenticatorPort();
         Itinerary itinerary = new Itinerary(departureCity,destinationCity);
 
 

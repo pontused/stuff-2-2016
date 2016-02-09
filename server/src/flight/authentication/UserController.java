@@ -25,7 +25,7 @@ public class UserController {
             return ticket;
         }else return new AuthTicket(user,false);
     }
-    public boolean authenticate(String username, Integer ticket){
+    public boolean validateTicket(String username, Integer ticket){
         return ticketDB.containsKey(username) && ticketDB.get(username).ticket.equals(ticket) ;
 
     }
