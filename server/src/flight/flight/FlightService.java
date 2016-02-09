@@ -18,7 +18,7 @@ import java.util.Map;
 /**
  * Created by peter on 2/8/16.
  */
-@WebService(serviceName = "ItineraryService", portName = "ItineraryPort", targetNamespace = "http://www.itineraryservice.com")
+@WebService(serviceName = "FlightService", portName = "FlightPort", targetNamespace = "http://www.flightservice.com")
 
 public class FlightService {
 
@@ -46,6 +46,8 @@ public class FlightService {
         List ticketList = (List) headers.get("Ticket");
         String username = (String) userList.get(0);
         int ticket = Integer.parseInt((String) ticketList.get(0));
+
+        System.out.println(username + " "+ticket);
         return authenticator.validateTicket(username,ticket);
 
 

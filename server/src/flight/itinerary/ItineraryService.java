@@ -1,12 +1,18 @@
 package flight.itinerary;
 
 import flight.DataControllerHandler;
+import flight.authentication.Authenticator;
 import flight.authentication.FlightAuthenticator;
 import flight.authentication.UserController;
 
+import javax.annotation.Resource;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import javax.xml.ws.WebServiceContext;
+import javax.xml.ws.handler.MessageContext;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by peter on 2/1/16.
@@ -17,11 +23,17 @@ import javax.jws.WebService;
 
 public class ItineraryService {
 
-    private UserController userController = DataControllerHandler.getUserController();
+    private Authenticator authenticator = new FlightAuthenticator();
+
+    @Resource
+    private WebServiceContext wsc;
 
     @WebMethod(operationName = "getItinerary")
     public void getItinerary(@WebParam (name = "departureCity") String departureCity, @WebParam (name = "destinationCity") String destinationCity ) {
 
+        if (validateHeader()) {
+
+        }
 
 
         //Itinerary itinerary = new Itinerary(departureCity,destinationCity);
@@ -29,15 +41,23 @@ public class ItineraryService {
 
     }
     @WebMethod(operationName = "checkAvailability")
-    public void checkAvailability(@WebParam (name = "departureCity") String departureCity, @WebParam (name = "destinationCity") String destinationCity ) {
+    public int checkAvailability(@WebParam (name = "departureCity") String departureCity, @WebParam (name = "destinationCity") String destinationCity ) {
+        if (validateHeader()) {
+            Itinerary itinerary = new Itinerary(departureCity,destinationCity);
 
+        }
+        return 0;
+    }
+    private boolean validateHeader(){
+        MessageContext messageContext = wsc.getMessageContext();
+        Map headers = (Map) messageContext.get(MessageContext.HTTP_REQUEST_HEADERS);
+        List userList = (List) headers.get("Username");
+        List ticketList = (List) headers.get("Ticket");
+        String username = (String) userList.get(0);
+        int ticket = Integer.parseInt((String) ticketList.get(0));
 
-        FlightAuthenticator authenticator = new FlightAuthenticator();
-        authenticator.validateTicket("peter",123);
-        //Authenticator_Service authenticator_service = new Authenticator_Service();
-        //Authenticator authenticator = authenticator_service.getAuthenticatorPort();
-        Itinerary itinerary = new Itinerary(departureCity,destinationCity);
-
+        System.out.println(username + " "+ticket);
+        return authenticator.validateTicket(username,ticket);
 
     }
 
