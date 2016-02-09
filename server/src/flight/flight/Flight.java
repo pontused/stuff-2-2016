@@ -12,7 +12,7 @@ public class Flight {
     public float price;
 
     public Flight(String airline, String departureCity, String destinationCity, float price) {
-        this.flightID = 1234;
+        this.flightID = genFlightID();
         this.airline = airline;
         this.departureCity = departureCity;
         this.destinationCity = destinationCity;
@@ -20,6 +20,9 @@ public class Flight {
 
     }
 
+    private int genFlightID(){
+        return 1234;
+    }
 
     public String getAirline() {
         return airline;
@@ -35,6 +38,7 @@ public class Flight {
     public float getPrice() {
         return price;
     }
+
 
 
 }

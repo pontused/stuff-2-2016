@@ -1,6 +1,7 @@
 package flight.itinerary;
 
 import flight.DataControllerHandler;
+import flight.authentication.FlightAuthenticator;
 import flight.authentication.UserController;
 
 import javax.jws.WebMethod;
@@ -31,6 +32,8 @@ public class ItineraryService {
     public void checkAvailability(@WebParam (name = "departureCity") String departureCity, @WebParam (name = "destinationCity") String destinationCity ) {
 
 
+        FlightAuthenticator authenticator = new FlightAuthenticator();
+        authenticator.validateTicket("peter",123);
         //Authenticator_Service authenticator_service = new Authenticator_Service();
         //Authenticator authenticator = authenticator_service.getAuthenticatorPort();
         Itinerary itinerary = new Itinerary(departureCity,destinationCity);
