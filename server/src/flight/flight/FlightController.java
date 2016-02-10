@@ -3,6 +3,8 @@ package flight.flight;
 import flight.authentication.User;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
 import java.util.TreeMap;
 
 /**
@@ -11,7 +13,7 @@ import java.util.TreeMap;
 public class FlightController {
 
 
-    private static ArrayList<Flight> flightDB = new ArrayList<Flight>();
+    private static HashMap<Flight,ArrayList<Passanger>> flightDB = new HashMap<Flight, ArrayList<Passanger>>();
 
 
     private ArrayList<Flight> flights;
@@ -21,15 +23,27 @@ public class FlightController {
     }
     private void genFlights(){
 
-        flightDB.add(new Flight("SAS","Stockholm","Dublin",2000));
+        flightDB.put(new Flight("SAS","Stockholm","Dublin",2000),new ArrayList<Passanger>());
 
     }
-    public ArrayList<Flight> getFlights(){
-        return flightDB;
+    private void addPassager(int flightNumber, Passanger passanger){
+        for (Flight f : flightDB.keySet()){
+            if (f.flightID == flightNumber){
+                f.decreaseAvailableSeats();
+                flightDB.get(f).add(passanger);
+            }
+        }
+    }
+    protected void bookFlight(int flightNumber,Passanger passanger){
+        addPassager(flightNumber,passanger);
+    }
+
+    public Set<Flight> getFlights(){
+        return flightDB.keySet();
     }
 
     public Flight getFlightByID(int id){
-        for (Flight flight : flightDB){
+        for (Flight flight : flightDB.keySet()){
             if (flight.flightID == id){
                 return flight;
             }

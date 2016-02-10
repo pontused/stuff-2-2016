@@ -26,6 +26,9 @@ public class Flight {
         return 1234;
     }
 
+    public void decreaseAvailableSeats(){
+        availableSeats -= 1;
+    }
     public String getAirline() {
         return airline;
     }
