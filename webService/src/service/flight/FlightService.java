@@ -12,10 +12,7 @@ import javax.xml.ws.WebServiceContext;
 import javax.xml.ws.handler.MessageContext;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by peter on 2/8/16.
@@ -41,7 +38,7 @@ public class FlightService {
     }
 
     @WebMethod(operationName = "getFlights")
-    public ArrayList<Flight> getFlights(String departureCity,String departureTime) throws ParseException{
+    public ArrayList<Flight> getFlights(String departureCity,Date departureTime) throws ParseException{
         return flightController.getFlights(departureCity, departureTime);
     }
 

@@ -1,8 +1,7 @@
 package service.itinerary;
 
-import service.DataControllerHandler;
 import service.authentication.Authenticator;
-import service.authentication.UserController;
+import service.itinerary.com.Flight.Flight;
 
 import javax.annotation.Resource;
 import javax.jws.WebMethod;
@@ -10,6 +9,9 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
 import javax.xml.ws.handler.MessageContext;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -28,11 +30,30 @@ public class ItineraryService {
     private WebServiceContext wsc;
 
     @WebMethod(operationName = "getItinerary")
-    public void getItinerary(@WebParam (name = "departureCity") String departureCity, @WebParam (name = "destinationCity") String destinationCity ) {
+    public void getItinerary(@WebParam (name = "departureCity") String departureCity, @WebParam (name = "destinationCity") String destinationCity )  {
+        FlightTree ft;
+        Date time;
 
-        if (validateHeader()) {
+        //if (validateHeader()) {
+            try {
+                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+                time = format.parse("12-03-2015 10:30");
 
-        }
+                ft = new FlightTree(departureCity, time, 5);
+                List<List<Flight>> flili = ft.getItinerary(destinationCity);
+
+                for (List<Flight> fli :flili) {
+                    System.out.println("------");
+                    for (Flight f: fli) {
+                        System.out.println("Flight " + f.getFlightID() + " departing from " + f.getDepartureCity() + " going to " + f.getDestinationCity());
+                        System.out.println("Departing at: " + f.getDepartureDate() + " and Ariving at: " + f.getArrivalDate());
+                        System.out.println("---");
+                    }
+                }
+            }catch(ParseException pe){
+
+            }
+        //}
 
 
         //Itinerary itinerary = new Itinerary(departureCity,destinationCity);

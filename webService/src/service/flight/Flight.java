@@ -18,16 +18,15 @@ public class Flight {
     public Date departureDate;
     public Date arrivalDate;
 
-    public Flight(String airline, String departureCity, String destinationCity, float price, String departureDate,String arrivalDate ) throws  ParseException{
+    public Flight(String airline, String departureCity, String destinationCity, float price, Date departureDate,Date arrivalDate ) throws  ParseException{
         this.airline = airline;
         this.departureCity = departureCity;
         this.destinationCity = destinationCity;
         this.price = price;
         this.availableSeats = 250;
 
-        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy hh:mm");
-        this.departureDate = format.parse(departureDate);
-        this.arrivalDate = format.parse(arrivalDate);
+        this.departureDate = departureDate;
+        this.arrivalDate = departureDate;
         this.flightID = genFlightID();
 
     }
