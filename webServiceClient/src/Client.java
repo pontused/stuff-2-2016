@@ -26,7 +26,17 @@ public class Client {
 
         //getFlightService();
 
-        getItinerary();
+        List<Itinerary> flili = getItinerary();
+
+
+        for (Itinerary fli :flili) {
+            System.out.println("------");
+            for (com.service.Itinerary.Flight f: fli.getFlightList()) {
+                System.out.println("Flight " + f.getFlightID() + " departing from " + f.getDepartureCity() + " going to " + f.getDestinationCity());
+                System.out.println("Departing at: " + f.getDepartureDate() + " and Ariving at: " + f.getArrivalDate());
+                System.out.println("---");
+            }
+        }
     }
 
     private AuthTicket authenticate(String username, String password){
@@ -48,13 +58,11 @@ public class Client {
 
 
     }
-    private void getItinerary(){
+    private List<Itinerary>  getItinerary(){
         ItineraryService_Service itineraryService = new ItineraryService_Service();
         ItineraryService itinerary = itineraryService.getItineraryPort();
-
-
-
-        itinerary.getItinerary("Stockholm","Galway");
+        List<Itinerary> itli = itinerary.getItinerary("Stockholm","Galway");
+        return itli;
 
     }
 
@@ -76,7 +84,7 @@ public class Client {
         System.out.println("testar ");
         try{
 
-            Flight f = flightServicePort.getFlightByID(1234);
+            com.service.Flight.Flight f = flightServicePort.getFlightByID(1234);
             System.out.println(f.getDestinationCity() + "  "+f.getDepartureDate());
         }catch (Exception e){
             System.out.println(e);

@@ -69,6 +69,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link Itinerary }
+     * 
+     */
+    public Itinerary createItinerary() {
+        return new Itinerary();
+    }
+
+    /**
+     * Create an instance of {@link Flight }
+     * 
+     */
+    public Flight createFlight() {
+        return new Flight();
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link GetItineraryResponse }{@code >}}
      * 
      */

@@ -3,6 +3,9 @@
 <xsd:schema>
 <xsd:import namespace="http://www.itineraryservice.com" schemaLocation="http://0.0.0.0:1001/Itinerary?xsd=1"></xsd:import>
 </xsd:schema>
+<xsd:schema>
+<xsd:import namespace="http://www.flightservice.com" schemaLocation="http://0.0.0.0:1001/Itinerary?xsd=2"></xsd:import>
+</xsd:schema>
 </types>
 <message name="getItinerary">
 <part name="parameters" element="tns:getItinerary"></part>

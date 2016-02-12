@@ -1,6 +1,7 @@
 
 package com.service.Itinerary;
 
+import java.util.List;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -28,12 +29,15 @@ public interface ItineraryService {
      * 
      * @param destinationCity
      * @param departureCity
+     * @return
+     *     returns java.util.List<com.service.Itinerary.Itinerary>
      */
     @WebMethod
+    @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "getItinerary", targetNamespace = "http://www.itineraryservice.com", className = "com.service.Itinerary.GetItinerary")
     @ResponseWrapper(localName = "getItineraryResponse", targetNamespace = "http://www.itineraryservice.com", className = "com.service.Itinerary.GetItineraryResponse")
     @Action(input = "http://www.itineraryservice.com/ItineraryService/getItineraryRequest", output = "http://www.itineraryservice.com/ItineraryService/getItineraryResponse")
-    public void getItinerary(
+    public List<Itinerary> getItinerary(
         @WebParam(name = "departureCity", targetNamespace = "")
         String departureCity,
         @WebParam(name = "destinationCity", targetNamespace = "")

@@ -1,6 +1,6 @@
 package service.itinerary;
 
-import service.flight.Flight;
+import service.itinerary.com.Flight.Flight;
 
 import java.util.ArrayList;
 

@@ -36,22 +36,21 @@ public class FlightTree {
         }
     }
     public List<List<Flight>> getItinerary(String destinationCity){
-        ArrayList<List<Flight>> itinerary = new ArrayList<>();
-        itinerary.add(new ArrayList<Flight>());
+        ArrayList<List<Flight>> itinerarys = new ArrayList<>();
+        itinerarys.add(new ArrayList<Flight>());
+
+        String departureCity;
+
 
         if(destinationCity.equals(this.name)){
         }else{
             for (FlightNode fn:lFlight) {
-                fn.getItineraryAcumulator(destinationCity, new ArrayList<Flight>(), itinerary);
+                fn.getItineraryAcumulator(destinationCity, new ArrayList<Flight>(), itinerarys);
             }
         }
-        return itinerary;
+        return itinerarys;
     }
 
-    public List<List<Flight>> getItineraryAcumulator(String destinationCity,ArrayList<Flight> path,List<List<Flight>> itinerary ){
-
-        return itinerary;
-    }
 
     public class FlightNode{
         Flight flight;
