@@ -26,7 +26,7 @@ public class Client {
 
         //getFlightService();
 
-        List<Itinerary> flili = getItinerary();
+        List<Itinerary> flili = getItinerary("Stockholm","Galway");
 
 
         for (Itinerary fli :flili) {
@@ -58,10 +58,11 @@ public class Client {
 
 
     }
-    private List<Itinerary>  getItinerary(){
+    private List<Itinerary>  getItinerary(String depart, String destination){
+        System.out.println("Itinerary: " + depart + " to " + destination);
         ItineraryService_Service itineraryService = new ItineraryService_Service();
         ItineraryService itinerary = itineraryService.getItineraryPort();
-        List<Itinerary> itli = itinerary.getItinerary("Stockholm","Galway");
+        List<Itinerary> itli = itinerary.getItinerary(depart,destination);
         return itli;
 
     }
