@@ -24,7 +24,7 @@ public class Client {
         ticket = authenticate("peter","peter");
 
 
-        getFlightService();
+        //getFlightService();
 
         getItinerary();
     }

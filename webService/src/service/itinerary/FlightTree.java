@@ -27,6 +27,7 @@ public class FlightTree {
             XMLGregorianCalendar date2 = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
 
             ArrayList<Flight> li = (ArrayList<Flight>)port.getFlights(this.name,date2);
+            //System.out.println(departureCity + " has " + li.size() + " repartures after " + date2);
             for (Flight ft:li) {
                 lFlight.add(new FlightNode(ft.getDestinationCity(), ft, depth-1));
             }
@@ -37,19 +38,18 @@ public class FlightTree {
     public List<List<Flight>> getItinerary(String destinationCity){
         ArrayList<List<Flight>> itinerary = new ArrayList<>();
         itinerary.add(new ArrayList<Flight>());
-        return getItineraryAcumulator(destinationCity, new ArrayList<Flight>(), itinerary);
+
+        if(destinationCity.equals(this.name)){
+        }else{
+            for (FlightNode fn:lFlight) {
+                fn.getItineraryAcumulator(destinationCity, new ArrayList<Flight>(), itinerary);
+            }
+        }
+        return itinerary;
     }
 
     public List<List<Flight>> getItineraryAcumulator(String destinationCity,ArrayList<Flight> path,List<List<Flight>> itinerary ){
-        if(destinationCity.equals(this.name)){
-            //path.add(flight);
-        }else{
-            //path.add(flight);
-            for (FlightNode fn:lFlight) {
-                fn.getItineraryAcumulator(destinationCity, new ArrayList(path), itinerary);
 
-            }
-        }
         return itinerary;
     }
 
@@ -64,7 +64,10 @@ public class FlightTree {
             this.depth = i;
             try {
                 FlightService port = (new FlightService_Service()).getFlightPort();
+
+
                 ArrayList<Flight> li = (ArrayList<Flight>)port.getFlights(this.name,flight.getArrivalDate());
+                //System.out.println(departureCity + " has " + li.size() + " repartures after " + flight.getArrivalDate());
                 for (Flight ft:li) {
                     lFlight.add(new FlightNode(ft.getDestinationCity(),ft,depth-1));
                 }
@@ -76,6 +79,7 @@ public class FlightTree {
         public List<List<Flight>> getItineraryAcumulator(String destinationCity,ArrayList<Flight> path,List<List<Flight>> itinerary ){
             if(destinationCity.equals(this.name)){
                 path.add(flight);
+                itinerary.add(path);
             }else{
                 path.add(flight);
                 for (FlightNode fn:lFlight) {

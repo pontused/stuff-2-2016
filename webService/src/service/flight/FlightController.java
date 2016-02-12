@@ -30,7 +30,7 @@ public class FlightController {
             flightDB.put(new Flight("SAS","Stockholm","Singapore",3000,format.parse("12-03-2015 10:40"),format.parse("12-03-2015 12:04")),new ArrayList<Passanger>());
             flightDB.put(new Flight("Aerlingus","Cork","Singapore",1500,format.parse("12-03-2015 12:23"),format.parse("12-03-2015 13:44")),new ArrayList<Passanger>());
             flightDB.put(new Flight("Aerlingus","Galway","New york",3500,format.parse("12-03-2015 11:23"),format.parse("12-03-2015 17:44")),new ArrayList<Passanger>());
-            flightDB.put(new Flight("Ryan Air","Dublin","Galway",500,format.parse("12-03-2015 13:23"),format.parse("12-03-2015 14:44")),new ArrayList<Passanger>());
+            flightDB.put(new Flight("Ryan Air","Dublin","Galway",500,format.parse("12-03-2015 16:23"),format.parse("12-03-2015 14:44")),new ArrayList<Passanger>());
             flightDB.put(new Flight("Ryan Air","Cork","Galway",300,format.parse("12-03-2015 10:32"),format.parse("12-03-2015 12:00")),new ArrayList<Passanger>());
             flightDB.put(new Flight("Ryan Air","Galway","Cork",300,format.parse("12-03-2015 12:23"),format.parse("12-03-2015 13:44")),new ArrayList<Passanger>());
 
