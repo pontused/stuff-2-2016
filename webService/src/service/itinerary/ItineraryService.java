@@ -7,14 +7,13 @@ import javax.annotation.Resource;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.ws.WebServiceContext;
 import javax.xml.ws.handler.MessageContext;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by peter on 2/1/16.
@@ -24,6 +23,12 @@ import java.util.Map;
 @WebService(serviceName = "ItineraryService", portName = "ItineraryPort", targetNamespace = "http://www.itineraryservice.com")
 
 public class ItineraryService {
+    private HashMap<String,List<Itinerary>> itmap;
+    private SerialnumberGenerator sg;
+    public ItineraryService(){
+        itmap = new HashMap<String,List<Itinerary>>();
+        sg = new SerialnumberGenerator();
+    }
 
     private Authenticator authenticator = new Authenticator();
 
@@ -36,10 +41,22 @@ public class ItineraryService {
         Date time;
         List<List<Flight>> flili = null;
         List<Itinerary> itli = new ArrayList<Itinerary>();
-        //if (validateHeader()) {
+        String routkey = departureCity + " : " + destinationCity;
+        if (validateHeader()) {
+
             try {
                 SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy hh:mm");
                 time = format.parse("12-03-2015 10:30");
+
+                validateItMap(time);
+/*
+                //check if a known itinerary exist for this rout
+
+*/
+
+
+
+
 
                 ft = new FlightTree(departureCity, time, 5);
                 flili = ft.getItinerary(destinationCity);
@@ -55,7 +72,8 @@ public class ItineraryService {
             }catch(ParseException pe){
 
             }
-        //}
+            //add to known itinerarys for this rout
+        }
 
 
         //Itinerary itinerary = new Itinerary(departureCity,destinationCity);
@@ -83,8 +101,41 @@ public class ItineraryService {
 
     }
 
+    public void validateItMap(Date time){
+        GregorianCalendar c = new GregorianCalendar();
+        c.setTime(time);
 
+        HashMap<String,List<Itinerary>> itmap_temp;
+        Boolean ok;
+        for (List<Itinerary> itli:itmap.values()) {
 
+            for (Itinerary it: itli) {
+                ok = true;
+                for(Flight f: it.getFlightList()){
+                    if(f.getDepartureDate().toGregorianCalendar().after(c)){
+
+                    }else{
+                        ok = false;
+                    }
+                }
+            }
+        }
+
+    };
+    /*
+                    //check if a known itinerary exist for this rout
+
+    */
+    public class SerialnumberGenerator {
+        int sn;
+        public SerialnumberGenerator(){
+            this.sn = 0;
+        }
+
+        public int getNewSN(){
+            return this.sn++;
+        }
+    }
 }
 /*
 @WebService(serviceName = "itinerary")

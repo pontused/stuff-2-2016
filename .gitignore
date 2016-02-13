@@ -46,3 +46,8 @@ Network Trash Folder
 Temporary Items
 .apdisk
 *.xml
+service/.idea/workspace.xml
+webService/out/production/webService/service/itinerary/ItineraryService$SerialnumberGenerator.class
+webService/out/production/webService/service/itinerary/ItineraryService.class
+*.class
+*.xml

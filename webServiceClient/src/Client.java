@@ -59,10 +59,21 @@ public class Client {
 
     }
     private List<Itinerary>  getItinerary(String depart, String destination){
-        System.out.println("Itinerary: " + depart + " to " + destination);
         ItineraryService_Service itineraryService = new ItineraryService_Service();
-        ItineraryService itinerary = itineraryService.getItineraryPort();
-        List<Itinerary> itli = itinerary.getItinerary(depart,destination);
+        ItineraryService itineraryServicePort = itineraryService.getItineraryPort();
+
+        Map<String ,Object> regMap = ((BindingProvider) itineraryServicePort).getRequestContext();
+        //regMap.put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY,"http://localhost:8080/server_war_exploded/Authenticator?wsdl");
+        Map<String, List<String>> header = new HashMap<String, List<String>>();
+        header.put("Username", Collections.singletonList("peter"));
+        header.put("Ticket", Collections.singletonList(ticket.getTicket().toString()));
+        regMap.put(MessageContext.HTTP_REQUEST_HEADERS,header);
+
+
+        System.out.println("Itinerary: " + depart + " to " + destination);
+      //  ItineraryService_Service itineraryService = new ItineraryService_Service();
+       // ItineraryService itinerary = itineraryService.getItineraryPort();
+        List<Itinerary> itli = itineraryServicePort.getItinerary(depart,destination);
         return itli;
 
     }
