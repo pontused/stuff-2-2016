@@ -28,13 +28,19 @@ public class Client {
 
         List<Itinerary> flili = getItinerary("Stockholm","Galway");
 
-
+        float price;
         for (Itinerary fli :flili) {
             System.out.println("------");
             for (com.service.Itinerary.Flight f: fli.getFlightList()) {
                 System.out.println("Flight " + f.getFlightID() + " departing from " + f.getDepartureCity() + " going to " + f.getDestinationCity());
                 System.out.println("Departing at: " + f.getDepartureDate() + " and Ariving at: " + f.getArrivalDate());
                 System.out.println("---");
+            }
+            try {
+                price = checkAvailability(fli.getId());
+                System.out.println("Price: " + price);
+            }catch(ItineraryNotAvailable_Exception e){
+                System.out.println("Price: the Itinerary is not available");
             }
         }
     }
@@ -58,6 +64,14 @@ public class Client {
 
 
     }
+
+    private float checkAvailability(int id) throws ItineraryNotAvailable_Exception{
+        ItineraryService_Service itineraryService = new ItineraryService_Service();
+        ItineraryService itineraryServicePort = itineraryService.getItineraryPort();
+
+        return itineraryServicePort.checkAvailability(id);
+    }
+
     private List<Itinerary>  getItinerary(String depart, String destination){
         ItineraryService_Service itineraryService = new ItineraryService_Service();
         ItineraryService itineraryServicePort = itineraryService.getItineraryPort();

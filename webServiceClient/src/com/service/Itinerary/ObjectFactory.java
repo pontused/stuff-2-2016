@@ -25,15 +25,26 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _GetItineraryResponse_QNAME = new QName("http://www.itineraryservice.com", "getItineraryResponse");
+    private final static QName _ItineraryNotAvailable_QNAME = new QName("http://www.itineraryservice.com", "ItineraryNotAvailable");
     private final static QName _CheckAvailabilityResponse_QNAME = new QName("http://www.itineraryservice.com", "checkAvailabilityResponse");
+    private final static QName _ValidateItMap_QNAME = new QName("http://www.itineraryservice.com", "validateItMap");
     private final static QName _CheckAvailability_QNAME = new QName("http://www.itineraryservice.com", "checkAvailability");
     private final static QName _GetItinerary_QNAME = new QName("http://www.itineraryservice.com", "getItinerary");
+    private final static QName _ValidateItMapResponse_QNAME = new QName("http://www.itineraryservice.com", "validateItMapResponse");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.service.Itinerary
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link Flight }
+     * 
+     */
+    public Flight createFlight() {
+        return new Flight();
     }
 
     /**
@@ -45,11 +56,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ItineraryNotAvailable }
+     * 
+     */
+    public ItineraryNotAvailable createItineraryNotAvailable() {
+        return new ItineraryNotAvailable();
+    }
+
+    /**
      * Create an instance of {@link CheckAvailabilityResponse }
      * 
      */
     public CheckAvailabilityResponse createCheckAvailabilityResponse() {
         return new CheckAvailabilityResponse();
+    }
+
+    /**
+     * Create an instance of {@link ValidateItMap }
+     * 
+     */
+    public ValidateItMap createValidateItMap() {
+        return new ValidateItMap();
     }
 
     /**
@@ -69,19 +96,19 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link ValidateItMapResponse }
+     * 
+     */
+    public ValidateItMapResponse createValidateItMapResponse() {
+        return new ValidateItMapResponse();
+    }
+
+    /**
      * Create an instance of {@link Itinerary }
      * 
      */
     public Itinerary createItinerary() {
         return new Itinerary();
-    }
-
-    /**
-     * Create an instance of {@link Flight }
-     * 
-     */
-    public Flight createFlight() {
-        return new Flight();
     }
 
     /**
@@ -94,12 +121,30 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ItineraryNotAvailable }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.itineraryservice.com", name = "ItineraryNotAvailable")
+    public JAXBElement<ItineraryNotAvailable> createItineraryNotAvailable(ItineraryNotAvailable value) {
+        return new JAXBElement<ItineraryNotAvailable>(_ItineraryNotAvailable_QNAME, ItineraryNotAvailable.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link CheckAvailabilityResponse }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://www.itineraryservice.com", name = "checkAvailabilityResponse")
     public JAXBElement<CheckAvailabilityResponse> createCheckAvailabilityResponse(CheckAvailabilityResponse value) {
         return new JAXBElement<CheckAvailabilityResponse>(_CheckAvailabilityResponse_QNAME, CheckAvailabilityResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ValidateItMap }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.itineraryservice.com", name = "validateItMap")
+    public JAXBElement<ValidateItMap> createValidateItMap(ValidateItMap value) {
+        return new JAXBElement<ValidateItMap>(_ValidateItMap_QNAME, ValidateItMap.class, null, value);
     }
 
     /**
@@ -118,6 +163,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://www.itineraryservice.com", name = "getItinerary")
     public JAXBElement<GetItinerary> createGetItinerary(GetItinerary value) {
         return new JAXBElement<GetItinerary>(_GetItinerary_QNAME, GetItinerary.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link ValidateItMapResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.itineraryservice.com", name = "validateItMapResponse")
+    public JAXBElement<ValidateItMapResponse> createValidateItMapResponse(ValidateItMapResponse value) {
+        return new JAXBElement<ValidateItMapResponse>(_ValidateItMapResponse_QNAME, ValidateItMapResponse.class, null, value);
     }
 
 }

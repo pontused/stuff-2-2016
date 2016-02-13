@@ -51,3 +51,4 @@ webService/out/production/webService/service/itinerary/ItineraryService$Serialnu
 webService/out/production/webService/service/itinerary/ItineraryService.class
 *.class
 *.xml
+*.xml

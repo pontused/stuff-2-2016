@@ -11,9 +11,9 @@ public class Driver {
         Driver d = new Driver();
     }
     public Driver(){
-        Endpoint.publish("http://0.0.0.0:1000/Auth", new Authenticator());
-        Endpoint.publish("http://0.0.0.0:1001/Itinerary", new ItineraryService());
-        Endpoint.publish("http://0.0.0.0:1002/Flight", new FlightService());
+        Endpoint.publish("http://0.0.0.0:10000/Auth", new Authenticator());
+        Endpoint.publish("http://0.0.0.0:10001/Itinerary", new ItineraryService());
+        Endpoint.publish("http://0.0.0.0:10002/Flight", new FlightService());
 
     }
 }

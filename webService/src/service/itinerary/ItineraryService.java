@@ -1,20 +1,17 @@
 package service.itinerary;
 
 import service.authentication.Authenticator;
-import service.itinerary.com.Flight.Flight;
 
 import javax.annotation.Resource;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.ws.WebServiceContext;
 import javax.xml.ws.handler.MessageContext;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
+import service.itinerary.com.Flight.*;
 /**
  * Created by peter on 2/1/16.
  */
@@ -23,6 +20,7 @@ import java.util.*;
 @WebService(serviceName = "ItineraryService", portName = "ItineraryPort", targetNamespace = "http://www.itineraryservice.com")
 
 public class ItineraryService {
+
     private HashMap<String,List<Itinerary>> itmap;
     private SerialnumberGenerator sg;
     public ItineraryService(){
@@ -37,6 +35,7 @@ public class ItineraryService {
 
     @WebMethod(operationName = "getItinerary")
     public List<Itinerary> getItinerary(@WebParam (name = "departureCity") String departureCity, @WebParam (name = "destinationCity") String destinationCity )  {
+
         FlightTree ft;
         Date time;
         List<List<Flight>> flili = null;
@@ -48,31 +47,30 @@ public class ItineraryService {
                 SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy hh:mm");
                 time = format.parse("12-03-2015 10:30");
 
+                //Validate that all known itinerarys are still valid, romves non valid onse.
                 validateItMap(time);
-/*
-                //check if a known itinerary exist for this rout
+                if (itmap.containsKey(routkey)){
+                    System.out.println("Retriving itinerarys");
+                    itli = itmap.get(routkey);
 
-*/
-
-
-
-
-
-                ft = new FlightTree(departureCity, time, 5);
-                flili = ft.getItinerary(destinationCity);
-                Itinerary it;
-                for (List<Flight> fli: flili) {
-                     it = new Itinerary(departureCity, destinationCity);
-                    for (Flight f:fli) {
-                        it.setFlight(f);
+                }else{
+                    System.out.println("Compiling itinerarys");
+                    ft = new FlightTree(departureCity, time, 5);
+                    flili = ft.getItinerary(destinationCity);
+                    Itinerary it;
+                    for (List<Flight> fli: flili) {
+                        it = new Itinerary(departureCity, destinationCity, sg.getNewSN());
+                        for (Flight f:fli) {
+                            it.setFlight(f);
+                        }
+                        itli.add(it);
                     }
-                    itli.add(it);
+                    itmap.put(routkey, itli);
                 }
 
             }catch(ParseException pe){
 
             }
-            //add to known itinerarys for this rout
         }
 
 
@@ -81,13 +79,29 @@ public class ItineraryService {
 
     }
     @WebMethod(operationName = "checkAvailability")
-    public int checkAvailability(@WebParam (name = "departureCity") String departureCity, @WebParam (name = "destinationCity") String destinationCity ) {
-        if (validateHeader()) {
-            Itinerary itinerary = new Itinerary(departureCity,destinationCity);
 
-        }
-        return 0;
+    public float checkAvailability(int id) throws ItineraryNotAvailable{
+        //Check all know itinerarys for a matching id.
+        //then goes thorugh that itinerary checking for seats and addint up the price.
+        float price  = 0;
+        //if (validateHeader()) {
+            for (String key:itmap.keySet()) {
+                List<Itinerary> itli = itmap.get(key);
+                for (Itinerary it: itli) {
+                    if(it.getId() == id){
+                        for(Flight f:it.getFlightList()){
+                            if (f.getAvailableSeats()>0){
+                                price = price + f.getPrice();
+                            }else throw new ItineraryNotAvailable();
+                        }
+                    }
+                }
+            }
+        //}
+        return price;
     }
+
+
     private boolean validateHeader(){
         MessageContext messageContext = wsc.getMessageContext();
         Map headers = (Map) messageContext.get(MessageContext.HTTP_REQUEST_HEADERS);
@@ -96,36 +110,54 @@ public class ItineraryService {
         String username = (String) userList.get(0);
         int ticket = Integer.parseInt((String) ticketList.get(0));
 
-        System.out.println(username + " "+ticket);
+        System.out.println(username + " " + ticket);
         return authenticator.validateTicket(username,ticket);
 
     }
 
     public void validateItMap(Date time){
+        //Check that all known itinerarys are valid.
+        FlightService port = (new FlightService_Service()).getFlightPort();
+
         GregorianCalendar c = new GregorianCalendar();
         c.setTime(time);
 
-        HashMap<String,List<Itinerary>> itmap_temp;
+        HashMap<String,List<Itinerary>> itmap_temp = new HashMap();
+        ArrayList<Itinerary> itli_temp = new ArrayList<>();
         Boolean ok;
-        for (List<Itinerary> itli:itmap.values()) {
-
+        for (String key:itmap.keySet()) {
+            List<Itinerary> itli = itmap.get(key);
             for (Itinerary it: itli) {
                 ok = true;
+                itli_temp = new ArrayList<>();
                 for(Flight f: it.getFlightList()){
+                    //if the flight departure time has passed.
                     if(f.getDepartureDate().toGregorianCalendar().after(c)){
-
+                        //Exception if the flight can not be found
+                        try{
+                            //if there are seats
+                            if(port.getFlightByID(f.getFlightID()).getAvailableSeats()>0){
+                            }else{
+                                ok = false;
+                            }
+                        }catch(Exception e){
+                            ok = false;
+                        }
                     }else{
                         ok = false;
                     }
                 }
+                if(ok){
+                    itli_temp.add(it);
+                }
+            }
+            if(itli_temp.size()>0){
+                itmap_temp.put(key, itli_temp);
             }
         }
-
+        this.itmap = itmap_temp;
     };
-    /*
-                    //check if a known itinerary exist for this rout
 
-    */
     public class SerialnumberGenerator {
         int sn;
         public SerialnumberGenerator(){
@@ -136,6 +168,7 @@ public class ItineraryService {
             return this.sn++;
         }
     }
+
 }
 /*
 @WebService(serviceName = "itinerary")

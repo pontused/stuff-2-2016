@@ -7,7 +7,9 @@ import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.ws.Action;
+import javax.xml.ws.FaultAction;
 import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
 
@@ -45,20 +47,34 @@ public interface ItineraryService {
 
     /**
      * 
-     * @param destinationCity
-     * @param departureCity
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "validateItMap", targetNamespace = "http://www.itineraryservice.com", className = "com.service.Itinerary.ValidateItMap")
+    @ResponseWrapper(localName = "validateItMapResponse", targetNamespace = "http://www.itineraryservice.com", className = "com.service.Itinerary.ValidateItMapResponse")
+    @Action(input = "http://www.itineraryservice.com/ItineraryService/validateItMapRequest", output = "http://www.itineraryservice.com/ItineraryService/validateItMapResponse")
+    public void validateItMap(
+        @WebParam(name = "arg0", targetNamespace = "")
+        XMLGregorianCalendar arg0);
+
+    /**
+     * 
+     * @param arg0
      * @return
-     *     returns int
+     *     returns float
+     * @throws ItineraryNotAvailable_Exception
      */
     @WebMethod
     @WebResult(targetNamespace = "")
     @RequestWrapper(localName = "checkAvailability", targetNamespace = "http://www.itineraryservice.com", className = "com.service.Itinerary.CheckAvailability")
     @ResponseWrapper(localName = "checkAvailabilityResponse", targetNamespace = "http://www.itineraryservice.com", className = "com.service.Itinerary.CheckAvailabilityResponse")
-    @Action(input = "http://www.itineraryservice.com/ItineraryService/checkAvailabilityRequest", output = "http://www.itineraryservice.com/ItineraryService/checkAvailabilityResponse")
-    public int checkAvailability(
-        @WebParam(name = "departureCity", targetNamespace = "")
-        String departureCity,
-        @WebParam(name = "destinationCity", targetNamespace = "")
-        String destinationCity);
+    @Action(input = "http://www.itineraryservice.com/ItineraryService/checkAvailabilityRequest", output = "http://www.itineraryservice.com/ItineraryService/checkAvailabilityResponse", fault = {
+        @FaultAction(className = ItineraryNotAvailable_Exception.class, value = "http://www.itineraryservice.com/ItineraryService/checkAvailability/Fault/ItineraryNotAvailable")
+    })
+    public float checkAvailability(
+        @WebParam(name = "arg0", targetNamespace = "")
+        int arg0)
+        throws ItineraryNotAvailable_Exception
+    ;
 
 }

@@ -20,6 +20,7 @@ public class FlightTree {
         this.time = t;
         this.depth = i;
         try {
+
             FlightService port = (new FlightService_Service()).getFlightPort();
 
             GregorianCalendar c = new GregorianCalendar();
@@ -31,11 +32,13 @@ public class FlightTree {
             for (Flight ft:li) {
                 lFlight.add(new FlightNode(ft.getDestinationCity(), ft, depth-1));
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     public List<List<Flight>> getItinerary(String destinationCity){
+
         ArrayList<List<Flight>> itinerarys = new ArrayList<>();
         itinerarys.add(new ArrayList<Flight>());
 
@@ -49,10 +52,12 @@ public class FlightTree {
             }
         }
         return itinerarys;
+
     }
 
 
     public class FlightNode{
+
         Flight flight;
         String name;
         int depth;
@@ -88,6 +93,8 @@ public class FlightTree {
             }
             return itinerary;
         }
+
+
     }
 
 }
