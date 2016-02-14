@@ -1,5 +1,5 @@
 
-package com.service.Itinerary;
+package com.service.itinerary;
 
 import java.util.List;
 import javax.jws.WebMethod;
@@ -32,12 +32,12 @@ public interface ItineraryService {
      * @param destinationCity
      * @param departureCity
      * @return
-     *     returns java.util.List<com.service.Itinerary.Itinerary>
+     *     returns java.util.List<com.service.itinerary.Itinerary>
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getItinerary", targetNamespace = "http://www.itineraryservice.com", className = "com.service.Itinerary.GetItinerary")
-    @ResponseWrapper(localName = "getItineraryResponse", targetNamespace = "http://www.itineraryservice.com", className = "com.service.Itinerary.GetItineraryResponse")
+    @RequestWrapper(localName = "getItinerary", targetNamespace = "http://www.itineraryservice.com", className = "com.service.itinerary.GetItinerary")
+    @ResponseWrapper(localName = "getItineraryResponse", targetNamespace = "http://www.itineraryservice.com", className = "com.service.itinerary.GetItineraryResponse")
     @Action(input = "http://www.itineraryservice.com/ItineraryService/getItineraryRequest", output = "http://www.itineraryservice.com/ItineraryService/getItineraryResponse")
     public List<Itinerary> getItinerary(
         @WebParam(name = "departureCity", targetNamespace = "")
@@ -48,26 +48,14 @@ public interface ItineraryService {
     /**
      * 
      * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "validateItMap", targetNamespace = "http://www.itineraryservice.com", className = "com.service.Itinerary.ValidateItMap")
-    @ResponseWrapper(localName = "validateItMapResponse", targetNamespace = "http://www.itineraryservice.com", className = "com.service.Itinerary.ValidateItMapResponse")
-    @Action(input = "http://www.itineraryservice.com/ItineraryService/validateItMapRequest", output = "http://www.itineraryservice.com/ItineraryService/validateItMapResponse")
-    public void validateItMap(
-        @WebParam(name = "arg0", targetNamespace = "")
-        XMLGregorianCalendar arg0);
-
-    /**
-     * 
-     * @param arg0
      * @return
      *     returns float
      * @throws ItineraryNotAvailable_Exception
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "checkAvailability", targetNamespace = "http://www.itineraryservice.com", className = "com.service.Itinerary.CheckAvailability")
-    @ResponseWrapper(localName = "checkAvailabilityResponse", targetNamespace = "http://www.itineraryservice.com", className = "com.service.Itinerary.CheckAvailabilityResponse")
+    @RequestWrapper(localName = "checkAvailability", targetNamespace = "http://www.itineraryservice.com", className = "com.service.itinerary.CheckAvailability")
+    @ResponseWrapper(localName = "checkAvailabilityResponse", targetNamespace = "http://www.itineraryservice.com", className = "com.service.itinerary.CheckAvailabilityResponse")
     @Action(input = "http://www.itineraryservice.com/ItineraryService/checkAvailabilityRequest", output = "http://www.itineraryservice.com/ItineraryService/checkAvailabilityResponse", fault = {
         @FaultAction(className = ItineraryNotAvailable_Exception.class, value = "http://www.itineraryservice.com/ItineraryService/checkAvailability/Fault/ItineraryNotAvailable")
     })
@@ -76,5 +64,32 @@ public interface ItineraryService {
         int arg0)
         throws ItineraryNotAvailable_Exception
     ;
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.util.List<com.service.itinerary.Itinerary>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getItineraryByID", targetNamespace = "http://www.itineraryservice.com", className = "com.service.itinerary.GetItineraryByID")
+    @ResponseWrapper(localName = "getItineraryByIDResponse", targetNamespace = "http://www.itineraryservice.com", className = "com.service.itinerary.GetItineraryByIDResponse")
+    @Action(input = "http://www.itineraryservice.com/ItineraryService/getItineraryByIDRequest", output = "http://www.itineraryservice.com/ItineraryService/getItineraryByIDResponse")
+    public List<Itinerary> getItineraryByID(
+        @WebParam(name = "arg0", targetNamespace = "")
+        int arg0);
+
+    /**
+     * 
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "validateItMap", targetNamespace = "http://www.itineraryservice.com", className = "com.service.itinerary.ValidateItMap")
+    @ResponseWrapper(localName = "validateItMapResponse", targetNamespace = "http://www.itineraryservice.com", className = "com.service.itinerary.ValidateItMapResponse")
+    @Action(input = "http://www.itineraryservice.com/ItineraryService/validateItMapRequest", output = "http://www.itineraryservice.com/ItineraryService/validateItMapResponse")
+    public void validateItMap(
+        @WebParam(name = "arg0", targetNamespace = "")
+        XMLGregorianCalendar arg0);
 
 }

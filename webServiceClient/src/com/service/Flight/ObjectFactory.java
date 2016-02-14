@@ -1,5 +1,5 @@
 
-package com.service.Flight;
+package com.service.flight;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
@@ -10,7 +10,7 @@ import javax.xml.namespace.QName;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the com.service.Flight package. 
+ * generated in the com.service.flight package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -25,15 +25,17 @@ import javax.xml.namespace.QName;
 public class ObjectFactory {
 
     private final static QName _GetFlightByID_QNAME = new QName("http://www.flightservice.com", "getFlightByID");
+    private final static QName _LockBookSeatResponse_QNAME = new QName("http://www.flightservice.com", "lockBookSeatResponse");
     private final static QName _NotAuthenticatedException_QNAME = new QName("http://www.flightservice.com", "NotAuthenticatedException");
     private final static QName _GetFlights_QNAME = new QName("http://www.flightservice.com", "getFlights");
     private final static QName _FlightDoesNotExistException_QNAME = new QName("http://www.flightservice.com", "FlightDoesNotExistException");
     private final static QName _ParseException_QNAME = new QName("http://www.flightservice.com", "ParseException");
     private final static QName _GetFlightsResponse_QNAME = new QName("http://www.flightservice.com", "getFlightsResponse");
+    private final static QName _LockBookSeat_QNAME = new QName("http://www.flightservice.com", "lockBookSeat");
     private final static QName _GetFlightByIDResponse_QNAME = new QName("http://www.flightservice.com", "getFlightByIDResponse");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.service.Flight
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.service.flight
      * 
      */
     public ObjectFactory() {
@@ -53,6 +55,14 @@ public class ObjectFactory {
      */
     public GetFlightByID createGetFlightByID() {
         return new GetFlightByID();
+    }
+
+    /**
+     * Create an instance of {@link LockBookSeatResponse }
+     * 
+     */
+    public LockBookSeatResponse createLockBookSeatResponse() {
+        return new LockBookSeatResponse();
     }
 
     /**
@@ -96,6 +106,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link LockBookSeat }
+     * 
+     */
+    public LockBookSeat createLockBookSeat() {
+        return new LockBookSeat();
+    }
+
+    /**
      * Create an instance of {@link Flight }
      * 
      */
@@ -110,6 +128,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://www.flightservice.com", name = "getFlightByID")
     public JAXBElement<GetFlightByID> createGetFlightByID(GetFlightByID value) {
         return new JAXBElement<GetFlightByID>(_GetFlightByID_QNAME, GetFlightByID.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link LockBookSeatResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.flightservice.com", name = "lockBookSeatResponse")
+    public JAXBElement<LockBookSeatResponse> createLockBookSeatResponse(LockBookSeatResponse value) {
+        return new JAXBElement<LockBookSeatResponse>(_LockBookSeatResponse_QNAME, LockBookSeatResponse.class, null, value);
     }
 
     /**
@@ -155,6 +182,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://www.flightservice.com", name = "getFlightsResponse")
     public JAXBElement<GetFlightsResponse> createGetFlightsResponse(GetFlightsResponse value) {
         return new JAXBElement<GetFlightsResponse>(_GetFlightsResponse_QNAME, GetFlightsResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link LockBookSeat }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.flightservice.com", name = "lockBookSeat")
+    public JAXBElement<LockBookSeat> createLockBookSeat(LockBookSeat value) {
+        return new JAXBElement<LockBookSeat>(_LockBookSeat_QNAME, LockBookSeat.class, null, value);
     }
 
     /**

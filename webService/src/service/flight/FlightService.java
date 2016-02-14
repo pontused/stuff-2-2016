@@ -1,17 +1,16 @@
 package service.flight;
 
 import service.DataControllerHandler;
-import service.authentication.Authenticator;
-import service.authentication.NotAuthenticatedException;
+
+import service.authentication.*;
+
 
 import javax.annotation.Resource;
 import javax.jws.WebMethod;
-import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
 import javax.xml.ws.handler.MessageContext;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -42,7 +41,10 @@ public class FlightService {
         return flightController.getFlights(departureCity, departureTime);
     }
 
-
+    @WebMethod(operationName = "lockBookSeat")
+    public void lockBookSeat(int flightID) throws ParseException{
+        flightController.getFlightByID(flightID).decreaseAvailableSeats();
+    }
 
     private boolean validateHeader(){
         MessageContext messageContext = wsc.getMessageContext();
@@ -52,6 +54,7 @@ public class FlightService {
         String username = (String) userList.get(0);
         int ticket = Integer.parseInt((String) ticketList.get(0));
         //System.out.println(username + " "+ticket);
+
         return authenticator.validateTicket(username,ticket);
     }
 

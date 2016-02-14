@@ -1,5 +1,5 @@
 
-package com.service.Itinerary;
+package com.service.itinerary;
 
 import javax.xml.ws.WebFault;
 
@@ -45,7 +45,7 @@ public class ItineraryNotAvailable_Exception
     /**
      * 
      * @return
-     *     returns fault bean: com.service.Itinerary.ItineraryNotAvailable
+     *     returns fault bean: com.service.itinerary.ItineraryNotAvailable
      */
     public ItineraryNotAvailable getFaultInfo() {
         return faultInfo;

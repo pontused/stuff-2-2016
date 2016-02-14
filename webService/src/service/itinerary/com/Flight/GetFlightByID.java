@@ -1,5 +1,5 @@
 
-package service.itinerary.com.Flight;
+package service.itinerary.com.flight;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

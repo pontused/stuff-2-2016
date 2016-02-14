@@ -11,12 +11,13 @@ import javax.xml.ws.WebServiceContext;
 import javax.xml.ws.handler.MessageContext;
 import java.util.List;
 import java.util.Map;
+import com.authenticator.AuthTicket;
 
 /**
  * Created by peter on 2/6/16.
  */
-@WebService( serviceName = "Authenticator", portName = "AuthenticatorPort", targetNamespace = "http://www.authenticator.com")
-public class Authenticator  {
+@WebService
+public class Authenticator implements com.authenticator.Authenticator {
 
     private UserController userController = DataControllerHandler.getUserController();
 

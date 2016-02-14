@@ -29,18 +29,6 @@ public interface ItineraryService {
 
     /**
      * 
-     * @param arg0
-     */
-    @WebMethod
-    @RequestWrapper(localName = "validateItMap", targetNamespace = "http://www.itineraryservice.com", className = "service.booking.com.itinerary.ValidateItMap")
-    @ResponseWrapper(localName = "validateItMapResponse", targetNamespace = "http://www.itineraryservice.com", className = "service.booking.com.itinerary.ValidateItMapResponse")
-    @Action(input = "http://www.itineraryservice.com/ItineraryService/validateItMapRequest", output = "http://www.itineraryservice.com/ItineraryService/validateItMapResponse")
-    public void validateItMap(
-        @WebParam(name = "arg0", targetNamespace = "")
-        XMLGregorianCalendar arg0);
-
-    /**
-     * 
      * @param destinationCity
      * @param departureCity
      * @return
@@ -56,6 +44,33 @@ public interface ItineraryService {
         String departureCity,
         @WebParam(name = "destinationCity", targetNamespace = "")
         String destinationCity);
+
+    /**
+     * 
+     * @param arg0
+     * @return
+     *     returns java.util.List<service.booking.com.itinerary.Itinerary>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "getItineraryByID", targetNamespace = "http://www.itineraryservice.com", className = "service.booking.com.itinerary.GetItineraryByID")
+    @ResponseWrapper(localName = "getItineraryByIDResponse", targetNamespace = "http://www.itineraryservice.com", className = "service.booking.com.itinerary.GetItineraryByIDResponse")
+    @Action(input = "http://www.itineraryservice.com/ItineraryService/getItineraryByIDRequest", output = "http://www.itineraryservice.com/ItineraryService/getItineraryByIDResponse")
+    public List<Itinerary> getItineraryByID(
+        @WebParam(name = "arg0", targetNamespace = "")
+        int arg0);
+
+    /**
+     * 
+     * @param arg0
+     */
+    @WebMethod
+    @RequestWrapper(localName = "validateItMap", targetNamespace = "http://www.itineraryservice.com", className = "service.booking.com.itinerary.ValidateItMap")
+    @ResponseWrapper(localName = "validateItMapResponse", targetNamespace = "http://www.itineraryservice.com", className = "service.booking.com.itinerary.ValidateItMapResponse")
+    @Action(input = "http://www.itineraryservice.com/ItineraryService/validateItMapRequest", output = "http://www.itineraryservice.com/ItineraryService/validateItMapResponse")
+    public void validateItMap(
+        @WebParam(name = "arg0", targetNamespace = "")
+        XMLGregorianCalendar arg0);
 
     /**
      * 

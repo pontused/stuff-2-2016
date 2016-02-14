@@ -1,5 +1,5 @@
 
-package service.itinerary.com.Authenticator;
+package service.itinerary.com.authenticator;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "authTicket", propOrder = {
+@XmlType(name = "authTicket", namespace = "http://www.authenticator.com", propOrder = {
     "name",
     "ticket"
 })

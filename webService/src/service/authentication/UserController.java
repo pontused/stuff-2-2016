@@ -1,6 +1,7 @@
 package service.authentication;
 
 import java.util.TreeMap;
+import com.authenticator.AuthTicket;
 
 /**
  * Created by peter on 2/3/16.
@@ -19,14 +20,19 @@ public class UserController {
         userDB.put("peter",new User("peter","peter"));
     }
     public AuthTicket authenticate(String user, String pass){
+        AuthTicket ticket = new AuthTicket();
+        ticket.setName(user);
         if (userDB.get(user).getPassword().equals(pass)){
-            AuthTicket ticket = new AuthTicket(user,true);
+            ticket.setTicket(genTicket(user));
             ticketDB.put(user,ticket);
             return ticket;
-        }else return new AuthTicket(user,false);
+        }else{
+            ticket.setTicket(null);
+            return ticket;
+        }
     }
     public boolean validateTicket(String username, Integer ticket){
-        return ticketDB.containsKey(username) && ticketDB.get(username).ticket.equals(ticket) ;
+        return ticketDB.containsKey(username) && ticketDB.get(username).getTicket().equals(ticket) ;
 
     }
     public AuthTicket getTicket(String username){
@@ -34,6 +40,12 @@ public class UserController {
             return ticketDB.get(username);
         else return null;
     }
+    private Integer genTicket (String name){
+        long time = System.currentTimeMillis();
+        Integer ticket = (name + time).hashCode();
+        return ticket;
+    }
+
 
 
 }

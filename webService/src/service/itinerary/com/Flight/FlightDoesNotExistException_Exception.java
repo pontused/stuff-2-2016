@@ -1,5 +1,5 @@
 
-package service.itinerary.com.Flight;
+package service.itinerary.com.flight;
 
 import javax.xml.ws.WebFault;
 
@@ -45,7 +45,7 @@ public class FlightDoesNotExistException_Exception
     /**
      * 
      * @return
-     *     returns fault bean: service.itinerary.com.Flight.FlightDoesNotExistException
+     *     returns fault bean: service.itinerary.com.flight.FlightDoesNotExistException
      */
     public FlightDoesNotExistException getFaultInfo() {
         return faultInfo;

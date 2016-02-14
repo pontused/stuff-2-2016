@@ -1,5 +1,5 @@
 
-package service.itinerary.com.Authenticator;
+package service.itinerary.com.authenticator;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

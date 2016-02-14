@@ -1,5 +1,5 @@
 
-package service.itinerary.com.Flight;
+package service.itinerary.com.flight;
 
 import java.util.ArrayList;
 import java.util.List;

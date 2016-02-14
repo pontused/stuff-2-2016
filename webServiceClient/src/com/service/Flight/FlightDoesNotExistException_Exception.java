@@ -1,5 +1,5 @@
 
-package com.service.Flight;
+package com.service.flight;
 
 import javax.xml.ws.WebFault;
 
@@ -45,7 +45,7 @@ public class FlightDoesNotExistException_Exception
     /**
      * 
      * @return
-     *     returns fault bean: com.service.Flight.FlightDoesNotExistException
+     *     returns fault bean: com.service.flight.FlightDoesNotExistException
      */
     public FlightDoesNotExistException getFaultInfo() {
         return faultInfo;

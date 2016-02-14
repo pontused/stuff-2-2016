@@ -1,5 +1,5 @@
 
-package service.itinerary.com.Authenticator;
+package service.itinerary.com.authenticator;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -17,7 +17,7 @@ import javax.xml.ws.ResponseWrapper;
  * Generated source version: 2.2
  * 
  */
-@WebService(name = "Authenticator", targetNamespace = "http://www.authenticator.com")
+@WebService(name = "Authenticator", targetNamespace = "http://authentication.service/")
 @XmlSeeAlso({
     ObjectFactory.class
 })
@@ -29,13 +29,13 @@ public interface Authenticator {
      * @param arg1
      * @param arg0
      * @return
-     *     returns service.itinerary.com.Authenticator.AuthTicket
+     *     returns service.itinerary.com.authenticator.AuthTicket
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "authenticate", targetNamespace = "http://www.authenticator.com", className = "service.itinerary.com.Authenticator.Authenticate")
-    @ResponseWrapper(localName = "authenticateResponse", targetNamespace = "http://www.authenticator.com", className = "service.itinerary.com.Authenticator.AuthenticateResponse")
-    @Action(input = "http://www.authenticator.com/Authenticator/authenticateRequest", output = "http://www.authenticator.com/Authenticator/authenticateResponse")
+    @RequestWrapper(localName = "authenticate", targetNamespace = "http://authentication.service/", className = "service.itinerary.com.authenticator.Authenticate")
+    @ResponseWrapper(localName = "authenticateResponse", targetNamespace = "http://authentication.service/", className = "service.itinerary.com.authenticator.AuthenticateResponse")
+    @Action(input = "http://authentication.service/Authenticator/authenticateRequest", output = "http://authentication.service/Authenticator/authenticateResponse")
     public AuthTicket authenticate(
         @WebParam(name = "arg0", targetNamespace = "")
         String arg0,
@@ -51,9 +51,9 @@ public interface Authenticator {
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "validateTicket", targetNamespace = "http://www.authenticator.com", className = "service.itinerary.com.Authenticator.ValidateTicket")
-    @ResponseWrapper(localName = "validateTicketResponse", targetNamespace = "http://www.authenticator.com", className = "service.itinerary.com.Authenticator.ValidateTicketResponse")
-    @Action(input = "http://www.authenticator.com/Authenticator/validateTicketRequest", output = "http://www.authenticator.com/Authenticator/validateTicketResponse")
+    @RequestWrapper(localName = "validateTicket", targetNamespace = "http://authentication.service/", className = "service.itinerary.com.authenticator.ValidateTicket")
+    @ResponseWrapper(localName = "validateTicketResponse", targetNamespace = "http://authentication.service/", className = "service.itinerary.com.authenticator.ValidateTicketResponse")
+    @Action(input = "http://authentication.service/Authenticator/validateTicketRequest", output = "http://authentication.service/Authenticator/validateTicketResponse")
     public boolean validateTicket(
         @WebParam(name = "arg0", targetNamespace = "")
         String arg0,

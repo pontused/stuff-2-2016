@@ -1,5 +1,5 @@
 
-package com.service.Itinerary;
+package com.service.itinerary;
 
 import java.util.ArrayList;
 import java.util.List;

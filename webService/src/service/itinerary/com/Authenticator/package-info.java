@@ -1,2 +1,2 @@
-@javax.xml.bind.annotation.XmlSchema(namespace = "http://www.authenticator.com")
-package service.itinerary.com.Authenticator;
+@javax.xml.bind.annotation.XmlSchema(namespace = "http://authentication.service/")
+package service.itinerary.com.authenticator;

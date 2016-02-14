@@ -1,7 +1,8 @@
 package service.itinerary;
 
 import java.util.ArrayList;
-import service.itinerary.com.Flight.*;
+
+import service.itinerary.com.flight.*;
 /**
  * Created by peter on 2/1/16.
  */
@@ -46,4 +47,5 @@ public class Itinerary {
     public int getId(){
         return this.id;
     }
+
 }

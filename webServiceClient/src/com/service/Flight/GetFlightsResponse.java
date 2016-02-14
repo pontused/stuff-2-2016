@@ -1,5 +1,5 @@
 
-package com.service.Flight;
+package com.service.flight;
 
 import java.util.ArrayList;
 import java.util.List;

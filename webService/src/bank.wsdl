@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.bankservice.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="BankService" targetNamespace="http://www.bankservice.com">
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   xmlns:tns="http://www.bankservice.com"
+                   attributeFormDefault="unqualified"
+                   elementFormDefault="unqualified"
+                   targetNamespace="http://www.bankservice.com">
+            <xs:element name="checkAccount" type="tns:checkAccount"/>
+            <xs:element name="checkAccountResponse" type="tns:checkAccountResponse"/>
+            <xs:element name="withdraw" type="tns:withdraw"/>
+            <xs:element name="withdrawResponse" type="tns:withdrawResponse"/>
+            <xs:complexType name="withdraw">
+                <xs:sequence>
+                    <xs:element name="account" type="xs:int"/>
+                    <xs:element name="amount" type="xs:float"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="withdrawResponse">
+                <xs:sequence>
+                    <xs:element name="return" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="checkAccount">
+                <xs:sequence>
+                    <xs:element name="account" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="checkAccountResponse">
+                <xs:sequence>
+                    <xs:element name="return" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:element name="NotAuthenticatedException" type="tns:NotAuthenticatedException"/>
+            <xs:complexType name="NotAuthenticatedException">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="message" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="withdrawResponse">
+        <wsdl:part element="tns:withdrawResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="withdraw">
+        <wsdl:part element="tns:withdraw" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="checkAccountResponse">
+        <wsdl:part element="tns:checkAccountResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="NotAuthenticatedException">
+        <wsdl:part element="tns:NotAuthenticatedException" name="NotAuthenticatedException">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="checkAccount">
+        <wsdl:part element="tns:checkAccount" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="BankService">
+        <wsdl:operation name="withdraw">
+            <wsdl:input message="tns:withdraw" name="withdraw">
+            </wsdl:input>
+            <wsdl:output message="tns:withdrawResponse" name="withdrawResponse">
+            </wsdl:output>
+            <wsdl:fault message="tns:NotAuthenticatedException" name="NotAuthenticatedException">
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="checkAccount">
+            <wsdl:input message="tns:checkAccount" name="checkAccount">
+            </wsdl:input>
+            <wsdl:output message="tns:checkAccountResponse" name="checkAccountResponse">
+            </wsdl:output>
+            <wsdl:fault message="tns:NotAuthenticatedException" name="NotAuthenticatedException">
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="BankServiceSoapBinding" type="tns:BankService">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="withdraw">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="withdraw">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="withdrawResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="NotAuthenticatedException">
+                <soap:fault name="NotAuthenticatedException" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+        <wsdl:operation name="checkAccount">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="checkAccount">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="checkAccountResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+            <wsdl:fault name="NotAuthenticatedException">
+                <soap:fault name="NotAuthenticatedException" use="literal"/>
+            </wsdl:fault>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="BankService">
+        <wsdl:port binding="tns:BankServiceSoapBinding" name="BankPort">
+            <soap:address location="http://Torsten:8080/server_war_exploded/BankService"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

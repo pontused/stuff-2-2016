@@ -1,5 +1,5 @@
 
-package com.service.Itinerary;
+package com.service.itinerary;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

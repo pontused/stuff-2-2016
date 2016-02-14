@@ -1,6 +1,6 @@
 package service.itinerary;
 
-import service.authentication.Authenticator;
+//import com.authenticatorimpl.Authenticator;
 
 import javax.annotation.Resource;
 import javax.jws.WebMethod;
@@ -11,7 +11,9 @@ import javax.xml.ws.handler.MessageContext;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import service.itinerary.com.Flight.*;
+
+import service.authentication.*;
+import service.itinerary.com.flight.*;
 /**
  * Created by peter on 2/1/16.
  */
@@ -64,8 +66,10 @@ public class ItineraryService {
                             it.setFlight(f);
                         }
                         itli.add(it);
+                        System.out.println("Storing itinerary as " + it.getId() + " with a length of " + it.getFlightList().size());
                     }
                     itmap.put(routkey, itli);
+
                 }
 
             }catch(ParseException pe){
@@ -79,7 +83,6 @@ public class ItineraryService {
 
     }
     @WebMethod(operationName = "checkAvailability")
-
     public float checkAvailability(int id) throws ItineraryNotAvailable{
         //Check all know itinerarys for a matching id.
         //then goes thorugh that itinerary checking for seats and addint up the price.
@@ -101,6 +104,20 @@ public class ItineraryService {
         return price;
     }
 
+    @WebMethod(operationName = "getItineraryByID")
+    public List<Itinerary> getItineraryByID(int id){
+        ArrayList<Itinerary> itlist = new ArrayList<Itinerary>();
+        for (String key:itmap.keySet()) {
+            List<Itinerary> itli = itmap.get(key);
+             for (Itinerary it: itli) {
+                if(it.getId() == id){
+                    System.out.println("Itinarary for id: "+ it.getId() +" found of length: " + it.getFlightList().size());
+                    itlist.add(it);
+                }
+            }
+        }
+        return itlist;
+    }
 
     private boolean validateHeader(){
         MessageContext messageContext = wsc.getMessageContext();
@@ -170,31 +187,3 @@ public class ItineraryService {
     }
 
 }
-/*
-@WebService(serviceName = "itinerary")
-@HandlerChain(file = "handler-chain.xml")
-public class itinerary {
-
-
-@WebMethod(operationName = "getItinerary")
-public ArrayList<FlightsList> getItinerary(@WebParam(name = "from") String from, @WebParam(name = "to") String to, @WebParam(name = "tokenid") String tokenid) throws AuthenticationException {
-
-    if(!Authenticator.Autheticate(tokenid)){
-        throw new AuthenticationException();
-    }
-
-
-    ArrayList<FlightsList> listOfLinks = Flight.getDirectFlights(from, to);
-    if (listOfLinks.isEmpty()) {
-        listOfLinks = Flight.getIndirectFlights(from, to);
-    }
-        /*
-         if(listOfLinks.isEmpty()){
-         listOfLinks = new ArrayList<FlightsList>();
-         }
-         */
-/*
-    return listOfLinks;
-}
-}
- */

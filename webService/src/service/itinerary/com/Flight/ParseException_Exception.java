@@ -1,5 +1,5 @@
 
-package service.itinerary.com.Flight;
+package service.itinerary.com.flight;
 
 import javax.xml.ws.WebFault;
 
@@ -45,7 +45,7 @@ public class ParseException_Exception
     /**
      * 
      * @return
-     *     returns fault bean: service.itinerary.com.Flight.ParseException
+     *     returns fault bean: service.itinerary.com.flight.ParseException
      */
     public ParseException getFaultInfo() {
         return faultInfo;

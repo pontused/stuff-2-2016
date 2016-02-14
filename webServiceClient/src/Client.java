@@ -4,9 +4,11 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import com.service.Authenticator.*;
-import com.service.Itinerary.*;
-import com.service.Flight.*;
+import com.service.auth.*;
+import com.service.booking.BookingImpl;
+import com.service.booking.BookingImplService;
+import com.service.itinerary.*;
+
 /**
  * Created by Pontus on 2016-02-12.
  */
@@ -24,14 +26,12 @@ public class Client {
         ticket = authenticate("peter","peter");
 
 
-        //getFlightService();
-
         List<Itinerary> flili = getItinerary("Stockholm","Galway");
 
         float price;
         for (Itinerary fli :flili) {
             System.out.println("------");
-            for (com.service.Itinerary.Flight f: fli.getFlightList()) {
+            for (Flight f: fli.getFlightList()) {
                 System.out.println("Flight " + f.getFlightID() + " departing from " + f.getDepartureCity() + " going to " + f.getDestinationCity());
                 System.out.println("Departing at: " + f.getDepartureDate() + " and Ariving at: " + f.getArrivalDate());
                 System.out.println("---");
@@ -43,10 +43,22 @@ public class Client {
                 System.out.println("Price: the Itinerary is not available");
             }
         }
+
+        bookItinerary(flili.get(1), "1234");
+    }
+
+    private void bookItinerary(Itinerary it, String cc){
+        BookingImpl bookingport = (new BookingImplService()).getBookingImplPort();
+
+        String ticket;
+        int transactionid = bookingport.bookTicket(cc,it.getId());
+        ticket = bookingport.getTicket(transactionid);
+        System.out.println(ticket);
+
     }
 
     private AuthTicket authenticate(String username, String password){
-        Authenticator_Service authenticator_service = new Authenticator_Service();
+        AuthenticatorService authenticator_service = new AuthenticatorService();
         Authenticator authenticator = authenticator_service.getAuthenticatorPort();
 
         AuthTicket ticket = authenticator.authenticate(username,password);
@@ -91,7 +103,7 @@ public class Client {
         return itli;
 
     }
-
+    /*
     private void getFlightService(){
         FlightService_Service flightService = new FlightService_Service();
         FlightService flightServicePort = flightService.getFlightPort();
@@ -117,4 +129,5 @@ public class Client {
         }
 
     }
+    */
 }

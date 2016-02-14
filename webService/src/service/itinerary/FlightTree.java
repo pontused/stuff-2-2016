@@ -1,11 +1,11 @@
 package service.itinerary;
 
 import java.util.*;
-import service.itinerary.com.Flight.*;
+
 
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
-
+import service.itinerary.com.flight.*;
 /**
  * Created by Pontus on 2016-02-12.
  */
@@ -29,7 +29,7 @@ public class FlightTree {
 
             ArrayList<Flight> li = (ArrayList<Flight>)port.getFlights(this.name,date2);
             //System.out.println(departureCity + " has " + li.size() + " repartures after " + date2);
-            for (Flight ft:li) {
+            for (service.itinerary.com.flight.Flight ft:li) {
                 lFlight.add(new FlightNode(ft.getDestinationCity(), ft, depth-1));
             }
 

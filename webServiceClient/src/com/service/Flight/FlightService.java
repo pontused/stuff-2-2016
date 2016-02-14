@@ -1,5 +1,5 @@
 
-package com.service.Flight;
+package com.service.flight;
 
 import java.util.List;
 import javax.jws.WebMethod;
@@ -32,13 +32,13 @@ public interface FlightService {
      * @param arg1
      * @param arg0
      * @return
-     *     returns java.util.List<com.service.Flight.Flight>
+     *     returns java.util.List<com.service.flight.Flight>
      * @throws ParseException_Exception
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getFlights", targetNamespace = "http://www.flightservice.com", className = "com.service.Flight.GetFlights")
-    @ResponseWrapper(localName = "getFlightsResponse", targetNamespace = "http://www.flightservice.com", className = "com.service.Flight.GetFlightsResponse")
+    @RequestWrapper(localName = "getFlights", targetNamespace = "http://www.flightservice.com", className = "com.service.flight.GetFlights")
+    @ResponseWrapper(localName = "getFlightsResponse", targetNamespace = "http://www.flightservice.com", className = "com.service.flight.GetFlightsResponse")
     @Action(input = "http://www.flightservice.com/FlightService/getFlightsRequest", output = "http://www.flightservice.com/FlightService/getFlightsResponse", fault = {
         @FaultAction(className = ParseException_Exception.class, value = "http://www.flightservice.com/FlightService/getFlights/Fault/ParseException")
     })
@@ -54,14 +54,14 @@ public interface FlightService {
      * 
      * @param arg0
      * @return
-     *     returns com.service.Flight.Flight
-     * @throws NotAuthenticatedException_Exception
+     *     returns com.service.flight.Flight
      * @throws FlightDoesNotExistException_Exception
+     * @throws NotAuthenticatedException_Exception
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "getFlightByID", targetNamespace = "http://www.flightservice.com", className = "com.service.Flight.GetFlightByID")
-    @ResponseWrapper(localName = "getFlightByIDResponse", targetNamespace = "http://www.flightservice.com", className = "com.service.Flight.GetFlightByIDResponse")
+    @RequestWrapper(localName = "getFlightByID", targetNamespace = "http://www.flightservice.com", className = "com.service.flight.GetFlightByID")
+    @ResponseWrapper(localName = "getFlightByIDResponse", targetNamespace = "http://www.flightservice.com", className = "com.service.flight.GetFlightByIDResponse")
     @Action(input = "http://www.flightservice.com/FlightService/getFlightByIDRequest", output = "http://www.flightservice.com/FlightService/getFlightByIDResponse", fault = {
         @FaultAction(className = NotAuthenticatedException_Exception.class, value = "http://www.flightservice.com/FlightService/getFlightByID/Fault/NotAuthenticatedException"),
         @FaultAction(className = FlightDoesNotExistException_Exception.class, value = "http://www.flightservice.com/FlightService/getFlightByID/Fault/FlightDoesNotExistException")
@@ -70,6 +70,23 @@ public interface FlightService {
         @WebParam(name = "arg0", targetNamespace = "")
         int arg0)
         throws FlightDoesNotExistException_Exception, NotAuthenticatedException_Exception
+    ;
+
+    /**
+     * 
+     * @param arg0
+     * @throws ParseException_Exception
+     */
+    @WebMethod
+    @RequestWrapper(localName = "lockBookSeat", targetNamespace = "http://www.flightservice.com", className = "com.service.flight.LockBookSeat")
+    @ResponseWrapper(localName = "lockBookSeatResponse", targetNamespace = "http://www.flightservice.com", className = "com.service.flight.LockBookSeatResponse")
+    @Action(input = "http://www.flightservice.com/FlightService/lockBookSeatRequest", output = "http://www.flightservice.com/FlightService/lockBookSeatResponse", fault = {
+        @FaultAction(className = ParseException_Exception.class, value = "http://www.flightservice.com/FlightService/lockBookSeat/Fault/ParseException")
+    })
+    public void lockBookSeat(
+        @WebParam(name = "arg0", targetNamespace = "")
+        int arg0)
+        throws ParseException_Exception
     ;
 
 }

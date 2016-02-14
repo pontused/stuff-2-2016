@@ -1,5 +1,5 @@
 
-package com.service.Itinerary;
+package com.service.itinerary;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
@@ -10,7 +10,7 @@ import javax.xml.namespace.QName;
 /**
  * This object contains factory methods for each 
  * Java content interface and Java element interface 
- * generated in the com.service.Itinerary package. 
+ * generated in the com.service.itinerary package. 
  * <p>An ObjectFactory allows you to programatically 
  * construct new instances of the Java representation 
  * for XML content. The Java representation of XML 
@@ -30,10 +30,12 @@ public class ObjectFactory {
     private final static QName _ValidateItMap_QNAME = new QName("http://www.itineraryservice.com", "validateItMap");
     private final static QName _CheckAvailability_QNAME = new QName("http://www.itineraryservice.com", "checkAvailability");
     private final static QName _GetItinerary_QNAME = new QName("http://www.itineraryservice.com", "getItinerary");
+    private final static QName _GetItineraryByIDResponse_QNAME = new QName("http://www.itineraryservice.com", "getItineraryByIDResponse");
+    private final static QName _GetItineraryByID_QNAME = new QName("http://www.itineraryservice.com", "getItineraryByID");
     private final static QName _ValidateItMapResponse_QNAME = new QName("http://www.itineraryservice.com", "validateItMapResponse");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.service.Itinerary
+     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: com.service.itinerary
      * 
      */
     public ObjectFactory() {
@@ -88,11 +90,27 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetItineraryByIDResponse }
+     * 
+     */
+    public GetItineraryByIDResponse createGetItineraryByIDResponse() {
+        return new GetItineraryByIDResponse();
+    }
+
+    /**
      * Create an instance of {@link CheckAvailability }
      * 
      */
     public CheckAvailability createCheckAvailability() {
         return new CheckAvailability();
+    }
+
+    /**
+     * Create an instance of {@link GetItineraryByID }
+     * 
+     */
+    public GetItineraryByID createGetItineraryByID() {
+        return new GetItineraryByID();
     }
 
     /**
@@ -163,6 +181,24 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://www.itineraryservice.com", name = "getItinerary")
     public JAXBElement<GetItinerary> createGetItinerary(GetItinerary value) {
         return new JAXBElement<GetItinerary>(_GetItinerary_QNAME, GetItinerary.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetItineraryByIDResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.itineraryservice.com", name = "getItineraryByIDResponse")
+    public JAXBElement<GetItineraryByIDResponse> createGetItineraryByIDResponse(GetItineraryByIDResponse value) {
+        return new JAXBElement<GetItineraryByIDResponse>(_GetItineraryByIDResponse_QNAME, GetItineraryByIDResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link GetItineraryByID }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://www.itineraryservice.com", name = "getItineraryByID")
+    public JAXBElement<GetItineraryByID> createGetItineraryByID(GetItineraryByID value) {
+        return new JAXBElement<GetItineraryByID>(_GetItineraryByID_QNAME, GetItineraryByID.class, null, value);
     }
 
     /**

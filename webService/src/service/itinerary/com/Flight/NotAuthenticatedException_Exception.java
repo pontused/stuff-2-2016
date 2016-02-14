@@ -1,5 +1,5 @@
 
-package service.itinerary.com.Flight;
+package service.itinerary.com.flight;
 
 import javax.xml.ws.WebFault;
 
@@ -45,7 +45,7 @@ public class NotAuthenticatedException_Exception
     /**
      * 
      * @return
-     *     returns fault bean: service.itinerary.com.Flight.NotAuthenticatedException
+     *     returns fault bean: service.itinerary.com.flight.NotAuthenticatedException
      */
     public NotAuthenticatedException getFaultInfo() {
         return faultInfo;
